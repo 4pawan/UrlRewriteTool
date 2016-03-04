@@ -13,7 +13,7 @@ namespace DigitasLbi.RedirectTool.ViewModel
     {
         private string _excelSourcePath;
         private string _excelDestinationPath;
-        private Constant.Constant.Mesasge _message;
+        private string _message;
         private Constant.Constant.MesasgeColor _statusFlag;
         public ICommand ShowDialogToSelectExcel { get; set; }
         public ICommand ShowSaveDialog { get; set; }
@@ -32,7 +32,7 @@ namespace DigitasLbi.RedirectTool.ViewModel
             }
         }
 
-        public Constant.Constant.Mesasge Message
+        public string Message
         {
             get { return _message; }
             set
@@ -99,7 +99,7 @@ namespace DigitasLbi.RedirectTool.ViewModel
             UrlRewriteUtilityCommand = new RelayCommand(() =>
             {
                 StatusFlag = Constant.Constant.MesasgeColor.InProcess;
-                Message = Constant.Constant.Mesasge.InProgress;
+                Message = Constant.Constant.Mesasge.InProgress.ToString();
                 string msg = null;
                 //Task.Run(() =>
                 //{
@@ -109,18 +109,18 @@ namespace DigitasLbi.RedirectTool.ViewModel
                 if (msg.Contains(Constant.Constant.Mesasge.Success.ToString()))
                 {
                     StatusFlag = Constant.Constant.MesasgeColor.Green;
-                    Message = Constant.Constant.Mesasge.Success;
+                    Message = Constant.Constant.Mesasge.Success.ToString();
                 }
                 if (msg.Contains(Constant.Constant.Mesasge.Fail.ToString()))
                 {
                     StatusFlag = Constant.Constant.MesasgeColor.Red;
-                    Message = Constant.Constant.Mesasge.Fail;
+                    Message = msg;
                 }
 
             }, () => true);
 
             StatusFlag = Constant.Constant.MesasgeColor.Default;
-            Message = Constant.Constant.Mesasge.NotStarted;
+            Message = Constant.Constant.Mesasge.NotStarted.ToString();
 
         }
     }

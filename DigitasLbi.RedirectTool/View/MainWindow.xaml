@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DigitasLbi.RedirectTool"
         xmlns:Common="clr-namespace:DigitasLbi.RedirectTool.Common" xmlns:ViewModel="clr-namespace:DigitasLbi.RedirectTool.ViewModel" x:Class="DigitasLbi.RedirectTool.View.MainWindow"
         mc:Ignorable="d"
-        Title="Url redirect tool" Height="350" Width="525">
+        Title="Url redirect tool" Height="450" Width="550">
     <Window.Resources>
         <Common:StringToColorConverter x:Key="StringToColorConverter"/>
         <Common:NegationConvertor x:Key="NegationConvertor"/>
@@ -15,11 +15,26 @@
         <ViewModel:UtilityMainViewModel/>
     </Window.DataContext>
     <Grid>
-        <Button  Content="Please Select Excel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Margin="17,55,0,0" Command="{Binding ShowDialogToSelectExcel}"/>
+        <Button Name="BtnSource"  Content="Please Select Excel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Margin="17,55,0,0" Command="{Binding ShowDialogToSelectExcel}"/>
         <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding ExcelSourcePath, Mode=TwoWay}" VerticalAlignment="Top" Width="316" Margin="184,55,0,0" IsReadOnly="True"/>
-        <Button  Content="Please select path to save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Margin="17,96,0,0" Command="{Binding ShowSaveDialog}" />
+        <Button Name="BtnDestination"  Content="Please select path to save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Margin="17,96,0,0" Command="{Binding ShowSaveDialog}" />
         <TextBox  TextWrapping="Wrap" Text="{Binding ExcelDestinationPath, Mode=TwoWay}" VerticalAlignment="Top" Width="316" Margin="183,96,17,0" IsReadOnly="True"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="17,176,0,0" Width="483" Height="120" Text="{Binding Message,Mode=TwoWay}" Background="{Binding StatusFlag, Mode=TwoWay, Converter={StaticResource StringToColorConverter}}"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="17,176,0,0" Width="483" Height="220" Text="{Binding Message,Mode=TwoWay}" Background="{Binding StatusFlag, Mode=TwoWay, Converter={StaticResource StringToColorConverter}}">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Background" Value="White"/>
+                    <!--<Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsPressed, ElementName=BtnSource}" Value="True"/>
+                                <Condition Binding="{Binding IsPressed, ElementName=BtnDestination}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Background" Value="White"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>-->
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
         <Button Content="Generate xml" HorizontalAlignment="Left" VerticalAlignment="Top" Width="483" Margin="17,134,0,0" Command="{Binding UrlRewriteUtilityCommand}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
