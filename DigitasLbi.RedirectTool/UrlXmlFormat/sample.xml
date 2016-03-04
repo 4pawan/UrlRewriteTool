@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rewrite>
+  <rules>
+    <rule name="redirect1" patternSyntax="Wildcard" stopProcessing="true">
+      <match url="*" />
+      <conditions>
+        <add input="{URL}" pattern="*/media/contacts*" />
+      </conditions>
+      <action type="Redirect" url="/careers" />
+    </rule>
+    <rule name="redirect2" patternSyntax="Wildcard" stopProcessing="true">
+      <match url="*" />
+      <conditions>
+        <add input="{URL}" pattern="*/media/contacts*" />
+      </conditions>
+      <action type="Redirect" url="/careers" />
+    </rule>
+    <rule name="redirect3" patternSyntax="Wildcard" stopProcessing="true">
+      <match url="*" />
+      <conditions>
+        <add input="{URL}" pattern="*/media/contacts*" />
+      </conditions>
+      <action type="Redirect" url="/careers" />
+    </rule>
+    <rule name="redirect4" patternSyntax="Wildcard" stopProcessing="true">
+      <match url="*" />
+      <conditions>
+        <add input="{URL}" pattern="*/media/contacts*" />
+      </conditions>
+      <action type="Redirect" url="/careers" />
+    </rule>
+  </rules>
+</rewrite>

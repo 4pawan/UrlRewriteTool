@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rewrite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <rules>
+    <rule name="rule0" patternSyntax="sdds0" stopProcessing="aa0" />
+    <rule name="rule1" patternSyntax="sdds1" stopProcessing="aa1" />
+    <rule name="rule2" patternSyntax="sdds2" stopProcessing="aa2" />
+    <rule name="rule3" patternSyntax="sdds3" stopProcessing="aa3" />
+    <rule name="rule4" patternSyntax="sdds4" stopProcessing="aa4" />
+    <rule name="rule5" patternSyntax="sdds5" stopProcessing="aa5" />
+    <rule name="rule6" patternSyntax="sdds6" stopProcessing="aa6" />
+    <rule name="rule7" patternSyntax="sdds7" stopProcessing="aa7" />
+    <rule name="rule8" patternSyntax="sdds8" stopProcessing="aa8" />
+    <rule name="rule9" patternSyntax="sdds9" stopProcessing="aa9" />
+  </rules>
+</rewrite>
