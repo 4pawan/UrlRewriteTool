@@ -21,9 +21,9 @@
         <Button Name="BtnDestination"  Content="Please select path to save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Margin="17,96,0,0" Command="{Binding ShowSaveDialog}" />
         <TextBox  TextWrapping="Wrap" Text="{Binding ExcelDestinationPath, Mode=TwoWay}" VerticalAlignment="Top" Width="316" Margin="183,96,17,0" IsReadOnly="True"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="17,176,0,0" Width="483" Height="220" Text="{Binding Message,Mode=TwoWay}" Background="{Binding StatusFlag, Mode=TwoWay, Converter={StaticResource StringToColorConverter}}">
-            <TextBlock.Style>
+            <!--<TextBlock.Style>
                 <Style TargetType="TextBlock">
-                    <Setter Property="Foreground"  Value="Gray"/>
+                    <Setter Property="Background"  Value="White"/>
                     <Style.Triggers>
                         <DataTrigger Value="AA">
                             <DataTrigger.Binding>
@@ -32,11 +32,11 @@
                                     <Binding Path="ExcelDestinationPath"/>
                                 </MultiBinding>
                             </DataTrigger.Binding>
-                            <Setter Property="Foreground" Value="Fuchsia"></Setter>
+                            <Setter Property="Background" Value="Fuchsia"></Setter>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-            </TextBlock.Style>
+            </TextBlock.Style>-->
         </TextBlock>
         <Button Content="Generate xml" HorizontalAlignment="Left" VerticalAlignment="Top" Width="483" Margin="17,134,0,0" Command="{Binding UrlRewriteUtilityCommand}">
             <Button.Style>

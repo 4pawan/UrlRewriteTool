@@ -57,4 +57,3 @@ C:\Project\TEMP\WPF\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\View\MainWi
 C:\Project\TEMP\WPF\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.g.resources
 C:\Project\TEMP\WPF\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.Properties.Resources.resources
 C:\Project\TEMP\WPF\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.csproj.GenerateResource.Cache
-C:\Project\TEMP\WPF\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.csprojResolveAssemblyReference.cache

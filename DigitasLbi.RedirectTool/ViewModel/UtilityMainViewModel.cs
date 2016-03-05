@@ -68,13 +68,13 @@ namespace DigitasLbi.RedirectTool.ViewModel
             ShowDialogToSelectExcel = new RelayCommand(() =>
             {
                 ExcelSourcePath = "";
+                StatusFlag = Constant.Constant.MesasgeColor.Default;
                 OpenFileDialog dlg = new OpenFileDialog
                 {
                     DefaultExt = ".xlsx",
                     Filter = "xlsx Files (*.xlsx)|*.xlsx|xls Files (*.xls)|*.xls"
                 };
-                bool? result = dlg.ShowDialog();
-                if (result == true)
+                if (dlg.ShowDialog() == true)
                 {
                     ExcelSourcePath = dlg.FileName;
                 }
@@ -83,15 +83,15 @@ namespace DigitasLbi.RedirectTool.ViewModel
             ShowSaveDialog = new RelayCommand(() =>
             {
                 ExcelDestinationPath = "";
+                StatusFlag = Constant.Constant.MesasgeColor.Default;
                 SaveFileDialog savedlg = new SaveFileDialog
                 {
                     Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*",
                     FilterIndex = 1,
                     RestoreDirectory = true
                 };
-                bool? result = savedlg.ShowDialog();
 
-                if (result == true)
+                if (savedlg.ShowDialog() == true)
                 {
                     ExcelDestinationPath = savedlg.FileName;
                 }
@@ -103,11 +103,11 @@ namespace DigitasLbi.RedirectTool.ViewModel
                 StatusFlag = Constant.Constant.MesasgeColor.InProcess;
                 Message = Constant.Constant.Mesasge.InProgress.ToString();
                 string msg = null;
-                //Task.Run(() =>
-                //{
-                //  msg = Helper.Helper.CreateFile(ExcelDestinationPath, ExcelSourcePath);
-                //});
-                msg = Helper.Helper.CreateFile(ExcelDestinationPath, ExcelSourcePath);
+                Task.Run(() =>
+                {
+                    msg = Helper.Helper.CreateFile(ExcelDestinationPath, ExcelSourcePath);
+                });
+                //msg = Helper.Helper.CreateFile(ExcelDestinationPath, ExcelSourcePath);
                 if (msg.Contains(Constant.Constant.Mesasge.Success.ToString()))
                 {
                     StatusFlag = Constant.Constant.MesasgeColor.Green;
