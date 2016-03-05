@@ -10,6 +10,7 @@
     <Window.Resources>
         <Common:StringToColorConverter x:Key="StringToColorConverter"/>
         <Common:NegationConvertor x:Key="NegationConvertor"/>
+        <Common:OrConverter x:Key="OrConverter"/>
     </Window.Resources>
     <Window.DataContext>
         <ViewModel:UtilityMainViewModel/>
@@ -22,16 +23,18 @@
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="17,176,0,0" Width="483" Height="220" Text="{Binding Message,Mode=TwoWay}" Background="{Binding StatusFlag, Mode=TwoWay, Converter={StaticResource StringToColorConverter}}">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
-                    <Setter Property="Background" Value="White"/>
-                    <!--<Style.Triggers>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsPressed, ElementName=BtnSource}" Value="True"/>
-                                <Condition Binding="{Binding IsPressed, ElementName=BtnDestination}" Value="True"/>
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="Background" Value="White"/>
-                        </MultiDataTrigger>
-                    </Style.Triggers>-->
+                    <Setter Property="Foreground"  Value="Gray"/>
+                    <Style.Triggers>
+                        <DataTrigger Value="AA">
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource OrConverter}">
+                                    <Binding Path="ExcelSourcePath"/>
+                                    <Binding Path="ExcelDestinationPath"/>
+                                </MultiBinding>
+                            </DataTrigger.Binding>
+                            <Setter Property="Foreground" Value="Fuchsia"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
                 </Style>
             </TextBlock.Style>
         </TextBlock>

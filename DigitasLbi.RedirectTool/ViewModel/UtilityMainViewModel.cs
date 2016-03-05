@@ -67,6 +67,7 @@ namespace DigitasLbi.RedirectTool.ViewModel
         {
             ShowDialogToSelectExcel = new RelayCommand(() =>
             {
+                ExcelSourcePath = "";
                 OpenFileDialog dlg = new OpenFileDialog
                 {
                     DefaultExt = ".xlsx",
@@ -81,6 +82,7 @@ namespace DigitasLbi.RedirectTool.ViewModel
 
             ShowSaveDialog = new RelayCommand(() =>
             {
+                ExcelDestinationPath = "";
                 SaveFileDialog savedlg = new SaveFileDialog
                 {
                     Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*",

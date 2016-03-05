@@ -84,7 +84,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Common\NegationConvertor.cs" />
-    <Compile Include="Common\stringToColorConverter.cs" />
+    <Compile Include="Common\OrConverter.cs" />
+    <Compile Include="Common\StringToColorConverter.cs" />
     <Compile Include="Constant\Connstant.cs" />
     <Compile Include="Extension\Extension.cs" />
     <Compile Include="Helper\Helper.cs" />
