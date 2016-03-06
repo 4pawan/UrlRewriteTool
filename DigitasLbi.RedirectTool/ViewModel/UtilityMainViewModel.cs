@@ -69,6 +69,8 @@ namespace DigitasLbi.RedirectTool.ViewModel
             {
                 ExcelSourcePath = "";
                 StatusFlag = Constant.Constant.MesasgeColor.Default;
+                Message = Constant.Constant.Mesasge.NotStarted.ToString();
+
                 OpenFileDialog dlg = new OpenFileDialog
                 {
                     DefaultExt = ".xlsx",
@@ -84,6 +86,8 @@ namespace DigitasLbi.RedirectTool.ViewModel
             {
                 ExcelDestinationPath = "";
                 StatusFlag = Constant.Constant.MesasgeColor.Default;
+                Message = Constant.Constant.Mesasge.NotStarted.ToString();
+
                 SaveFileDialog savedlg = new SaveFileDialog
                 {
                     Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*",
