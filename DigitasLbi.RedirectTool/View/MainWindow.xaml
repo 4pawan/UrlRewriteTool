@@ -16,11 +16,28 @@
         <ViewModel:UtilityMainViewModel/>
     </Window.DataContext>
     <Grid>
-        <Button Name="BtnSource"  Content="Please Select Excel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Margin="17,55,0,0" Command="{Binding ShowDialogToSelectExcel}"/>
-        <TextBox  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding ExcelSourcePath, Mode=TwoWay}" VerticalAlignment="Top" Width="316" Margin="184,55,0,0" IsReadOnly="True"/>
-        <Button Name="BtnDestination"  Content="Please select path to save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Margin="17,96,0,0" Command="{Binding ShowSaveDialog}" />
-        <TextBox  TextWrapping="Wrap" Text="{Binding ExcelDestinationPath, Mode=TwoWay}" VerticalAlignment="Top" Width="316" Margin="183,96,17,0" IsReadOnly="True"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="17,176,0,0" Width="483" Height="220" Text="{Binding Message,Mode=TwoWay}" Background="{Binding StatusFlag, Mode=TwoWay, Converter={StaticResource StringToColorConverter}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="38*"/>
+            <RowDefinition Height="37*"/>
+            <RowDefinition Height="258*"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="TextBox">
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="Width" Value="318"/>
+                <Setter Property="Height" Value="23"/>
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="IsReadOnly" Value="True"/>
+            </Style>
+        </Grid.Resources>
+        <Button Name="BtnSource"  Content="Please Select Excel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Margin="17,7,0,0" Command="{Binding ShowDialogToSelectExcel}" Grid.Row="1"/>
+        <TextBox Text="{Binding ExcelSourcePath, Mode=TwoWay}"  Grid.Row="1" Margin="183,7,0,0"/>
+        <Button Name="BtnDestination"  Content="Please select path to save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Margin="17,8,0,0" Command="{Binding ShowSaveDialog}" Grid.Row="2" />
+        <TextBox Text="{Binding ExcelDestinationPath, Mode=TwoWay}"  Grid.Row="2" Margin="183,8,0,0"/>
+        <TextBlock  Margin="17,12.6,43,10"  Text="{Binding Message,Mode=TwoWay}" Background="{Binding StatusFlag, Mode=TwoWay, Converter={StaticResource StringToColorConverter}}" Grid.Row="4">
             <!--<TextBlock.Style>
                 <Style TargetType="TextBlock">
                     <Setter Property="Background"  Value="White"/>
@@ -38,7 +55,7 @@
                 </Style>
             </TextBlock.Style>-->
         </TextBlock>
-        <Button Content="Generate xml" HorizontalAlignment="Left" VerticalAlignment="Top" Width="483" Margin="17,134,0,0" Command="{Binding UrlRewriteUtilityCommand}">
+        <Button Content="Generate xml" HorizontalAlignment="Left" VerticalAlignment="Top" Width="484" Margin="17,7.4,0,0" Command="{Binding UrlRewriteUtilityCommand}" Grid.Row="3">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="IsEnabled" Value="False"/>

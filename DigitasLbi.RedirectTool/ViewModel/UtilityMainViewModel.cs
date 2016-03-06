@@ -98,16 +98,16 @@ namespace DigitasLbi.RedirectTool.ViewModel
 
             }, () => true);
 
-            UrlRewriteUtilityCommand = new RelayCommand(() =>
+
+            UrlRewriteUtilityCommand = new RelayCommand(async () =>
             {
                 StatusFlag = Constant.Constant.MesasgeColor.InProcess;
                 Message = Constant.Constant.Mesasge.InProgress.ToString();
                 string msg = null;
-                Task.Run(() =>
+                await Task.Run(() =>
                 {
                     msg = Helper.Helper.CreateFile(ExcelDestinationPath, ExcelSourcePath);
                 });
-                //msg = Helper.Helper.CreateFile(ExcelDestinationPath, ExcelSourcePath);
                 if (msg.Contains(Constant.Constant.Mesasge.Success.ToString()))
                 {
                     StatusFlag = Constant.Constant.MesasgeColor.Green;
