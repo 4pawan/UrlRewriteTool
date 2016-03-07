@@ -22,18 +22,13 @@ namespace DigitasLbi.RedirectTool.Helper
                 var dt = package.ToDataTable();
                 List<rewriteRule> rules = new List<rewriteRule>();
 
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     rules.Add(new rewriteRule
                     {
                         stopProcessing = true,
                         name = "rule" + i,
                         patternSyntax = "Wildcard",
-                        action = new rewriteRuleAction
-                        {
-                            type = "Redirect",
-                            url = "url123"
-                        },
                         match = new rewriteRuleMatch
                         {
                             url = "*"
@@ -43,8 +38,13 @@ namespace DigitasLbi.RedirectTool.Helper
                             add = new rewriteRuleConditionsAdd
                             {
                                 input = "{URL}",
-                                pattern = "test"
+                                pattern = dt.Rows[i][1].ToString() //existing url
                             }
+                        },
+                        action = new rewriteRuleAction
+                        {
+                            type = "Redirect",
+                            url = dt.Rows[i][3].ToString()  // to be replaced
                         }
                     });
                 }

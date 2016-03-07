@@ -37,7 +37,7 @@
         <TextBox Text="{Binding ExcelSourcePath, Mode=TwoWay}"  Grid.Row="1" Margin="183,7,0,0"/>
         <Button Name="BtnDestination"  Content="Please select path to save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Margin="17,8,0,0" Command="{Binding ShowSaveDialog}" Grid.Row="2" />
         <TextBox Text="{Binding ExcelDestinationPath, Mode=TwoWay}"  Grid.Row="2" Margin="183,8,0,0"/>
-        <TextBlock  Margin="17,12.6,43,10"  Text="{Binding Message,Mode=TwoWay}" Background="{Binding StatusFlag, Mode=TwoWay, Converter={StaticResource StringToColorConverter}}" Grid.Row="4">
+        <TextBlock  Margin="17,13,41,10"  Text="{Binding Message,Mode=TwoWay}" Background="{Binding StatusFlag, Mode=TwoWay, Converter={StaticResource StringToColorConverter}}" Grid.Row="4">
             <!--<TextBlock.Style>
                 <Style TargetType="TextBlock">
                     <Setter Property="Background"  Value="White"/>
