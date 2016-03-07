@@ -27,7 +27,6 @@ C:\Project\Temp\WPF\RedirectTool\DigitasLbi.RedirectTool\DigitasLbi.RedirectTool
 C:\Project\Temp\WPF\RedirectTool\DigitasLbi.RedirectTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.exe
 C:\Project\Temp\WPF\RedirectTool\DigitasLbi.RedirectTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.pdb
 C:\Project\Temp\WPF\RedirectTool\DigitasLbi.RedirectTool\DigitasLbi.RedirectTool\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Project\Temp\WPF\RedirectTool\DigitasLbi.RedirectTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.csprojResolveAssemblyReference.cache
 C:\Project\TEMP\WPF\UrlRewriteTool\DigitasLbi.RedirectTool\bin\Debug\DigitasLbi.RedirectTool.exe.config
 C:\Project\TEMP\WPF\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.exe
 C:\Project\TEMP\WPF\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.pdb

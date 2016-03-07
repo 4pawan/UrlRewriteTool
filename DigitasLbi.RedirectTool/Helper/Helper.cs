@@ -26,14 +26,30 @@ namespace DigitasLbi.RedirectTool.Helper
                 {
                     rules.Add(new rewriteRule
                     {
-                        stopProcessing = "aa" + i,
+                        stopProcessing = true,
                         name = "rule" + i,
-                        patternSyntax = "sdds" + i
+                        patternSyntax = "Wildcard",
+                        action = new rewriteRuleAction
+                        {
+                            type = "Redirect",
+                            url = "url123"
+                        },
+                        match = new rewriteRuleMatch
+                        {
+                            url = "*"
+                        },
+                        conditions = new rewriteRuleConditions
+                        {
+                            add = new rewriteRuleConditionsAdd
+                            {
+                                input = "{URL}",
+                                pattern = "test"
+                            }
+                        }
                     });
                 }
 
                 var data = new rewrite { rules = rules.ToArray() };
-
                 var serializer = new XmlSerializer(typeof(rewrite));
 
                 using (var stream = new StreamWriter(xmlPathToSave))

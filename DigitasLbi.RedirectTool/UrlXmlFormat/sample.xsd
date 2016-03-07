@@ -1,30 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!--<xs:schema id="sample"
-    targetNamespace="http://tempuri.org/sample.xsd"
-    elementFormDefault="qualified"
-    xmlns="http://tempuri.org/sample.xsd"
-    xmlns:mstns="http://tempuri.org/sample.xsd"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
->
-</xs:schema>-->
-
-<xs:schema id="sample" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="rewrite">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="rules">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="rule" maxOccurs="unbounded" minOccurs="0">
+              <xs:element maxOccurs="unbounded" name="rule">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="match">
                       <xs:complexType>
-                        <xs:simpleContent>
-                          <xs:extension base="xs:string">
-                            <xs:attribute type="xs:string" name="url" use="optional"/>
-                          </xs:extension>
-                        </xs:simpleContent>
+                        <xs:attribute name="url" type="xs:string" use="required" />
                       </xs:complexType>
                     </xs:element>
                     <xs:element name="conditions">
@@ -32,12 +19,8 @@
                         <xs:sequence>
                           <xs:element name="add">
                             <xs:complexType>
-                              <xs:simpleContent>
-                                <xs:extension base="xs:string">
-                                  <xs:attribute type="xs:string" name="input" use="optional"/>
-                                  <xs:attribute type="xs:string" name="pattern" use="optional"/>
-                                </xs:extension>
-                              </xs:simpleContent>
+                              <xs:attribute name="input" type="xs:string" use="required" />
+                              <xs:attribute name="pattern" type="xs:string" use="required" />
                             </xs:complexType>
                           </xs:element>
                         </xs:sequence>
@@ -45,18 +28,14 @@
                     </xs:element>
                     <xs:element name="action">
                       <xs:complexType>
-                        <xs:simpleContent>
-                          <xs:extension base="xs:string">
-                            <xs:attribute type="xs:string" name="type" use="optional"/>
-                            <xs:attribute type="xs:string" name="url" use="optional"/>
-                          </xs:extension>
-                        </xs:simpleContent>
+                        <xs:attribute name="type" type="xs:string" use="required" />
+                        <xs:attribute name="url" type="xs:string" use="required" />
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
-                  <xs:attribute type="xs:string" name="name" use="optional"/>
-                  <xs:attribute type="xs:string" name="patternSyntax" use="optional"/>
-                  <xs:attribute type="xs:string" name="stopProcessing" use="optional"/>
+                  <xs:attribute name="name" type="xs:string" use="required" />
+                  <xs:attribute name="patternSyntax" type="xs:string" use="required" />
+                  <xs:attribute name="stopProcessing" type="xs:boolean" use="required" />
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
