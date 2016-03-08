@@ -5,16 +5,40 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitasLbi.RedirectTool", "DigitasLbi.RedirectTool\DigitasLbi.RedirectTool.csproj", "{3A71C92F-0DB9-4016-9B7E-B2B07F7786A6}"
 EndProject
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "UrlRewriteTool.SetUp", "UrlRewriteTool.SetUp\UrlRewriteTool.SetUp.isproj", "{C22D3633-6AEF-45F2-BA25-FBDF5A98B6D7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3A71C92F-0DB9-4016-9B7E-B2B07F7786A6} = {3A71C92F-0DB9-4016-9B7E-B2B07F7786A6}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CD_ROM|Any CPU = CD_ROM|Any CPU
 		Debug|Any CPU = Debug|Any CPU
+		DVD-5|Any CPU = DVD-5|Any CPU
 		Release|Any CPU = Release|Any CPU
+		SingleImage|Any CPU = SingleImage|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A71C92F-0DB9-4016-9B7E-B2B07F7786A6}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{3A71C92F-0DB9-4016-9B7E-B2B07F7786A6}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
 		{3A71C92F-0DB9-4016-9B7E-B2B07F7786A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3A71C92F-0DB9-4016-9B7E-B2B07F7786A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A71C92F-0DB9-4016-9B7E-B2B07F7786A6}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A71C92F-0DB9-4016-9B7E-B2B07F7786A6}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
 		{3A71C92F-0DB9-4016-9B7E-B2B07F7786A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A71C92F-0DB9-4016-9B7E-B2B07F7786A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A71C92F-0DB9-4016-9B7E-B2B07F7786A6}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{3A71C92F-0DB9-4016-9B7E-B2B07F7786A6}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{C22D3633-6AEF-45F2-BA25-FBDF5A98B6D7}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
+		{C22D3633-6AEF-45F2-BA25-FBDF5A98B6D7}.CD_ROM|Any CPU.Build.0 = CD_ROM
+		{C22D3633-6AEF-45F2-BA25-FBDF5A98B6D7}.Debug|Any CPU.ActiveCfg = DVD-5
+		{C22D3633-6AEF-45F2-BA25-FBDF5A98B6D7}.Debug|Any CPU.Build.0 = DVD-5
+		{C22D3633-6AEF-45F2-BA25-FBDF5A98B6D7}.DVD-5|Any CPU.ActiveCfg = DVD-5
+		{C22D3633-6AEF-45F2-BA25-FBDF5A98B6D7}.DVD-5|Any CPU.Build.0 = DVD-5
+		{C22D3633-6AEF-45F2-BA25-FBDF5A98B6D7}.Release|Any CPU.ActiveCfg = SingleImage
+		{C22D3633-6AEF-45F2-BA25-FBDF5A98B6D7}.Release|Any CPU.Build.0 = SingleImage
+		{C22D3633-6AEF-45F2-BA25-FBDF5A98B6D7}.SingleImage|Any CPU.ActiveCfg = SingleImage
+		{C22D3633-6AEF-45F2-BA25-FBDF5A98B6D7}.SingleImage|Any CPU.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

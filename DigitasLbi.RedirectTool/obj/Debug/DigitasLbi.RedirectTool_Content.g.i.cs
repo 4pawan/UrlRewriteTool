@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("urlxmlformat/sample.xml")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/lbi.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/redshift-icon-256.png")]
 
 
