@@ -152,15 +152,42 @@ public partial class rewriteRuleMatch {
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
 public partial class rewriteRuleConditions {
     
-    private rewriteRuleConditionsAdd addField;
+    private rewriteRuleConditionsAdd[] addField;
+    
+    private bool trackAllCapturesField;
+    
+    private bool trackAllCapturesFieldSpecified;
     
     /// <remarks/>
-    public rewriteRuleConditionsAdd add {
+    [System.Xml.Serialization.XmlElementAttribute("add")]
+    public rewriteRuleConditionsAdd[] add {
         get {
             return this.addField;
         }
         set {
             this.addField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public bool trackAllCaptures {
+        get {
+            return this.trackAllCapturesField;
+        }
+        set {
+            this.trackAllCapturesField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool trackAllCapturesSpecified {
+        get {
+            return this.trackAllCapturesFieldSpecified;
+        }
+        set {
+            this.trackAllCapturesFieldSpecified = value;
         }
     }
 }

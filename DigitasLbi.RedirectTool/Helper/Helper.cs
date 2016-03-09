@@ -24,22 +24,37 @@ namespace DigitasLbi.RedirectTool.Helper
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
+
+                    List<rewriteRuleConditionsAdd> addlst = new List<rewriteRuleConditionsAdd>();
+
+
+                    addlst = new List<rewriteRuleConditionsAdd>
+                    {
+                         new rewriteRuleConditionsAdd
+                         {
+                           input = "{HTTP_HOST}",
+                           pattern = "www.lloydsbankinggroup.com"
+                         },
+                         new rewriteRuleConditionsAdd
+                         {
+                           input = "{URL}",
+                           pattern = dt.Rows[i][1].ToString() //existing url
+                         }
+                    };
+
                     rules.Add(new rewriteRule
                     {
                         stopProcessing = true,
                         name = "rule" + i,
-                        patternSyntax = "Wildcard",
+                        patternSyntax = "ECMAScript",
                         match = new rewriteRuleMatch
                         {
-                            url = "*"
+                            url = ".*"
                         },
                         conditions = new rewriteRuleConditions
                         {
-                            add = new rewriteRuleConditionsAdd
-                            {
-                                input = "{URL}",
-                                pattern = dt.Rows[i][1].ToString() //existing url
-                            }
+                            add= addlst.ToArray(),
+                            trackAllCaptures=true
                         },
                         action = new rewriteRuleAction
                         {

@@ -17,13 +17,14 @@
                     <xs:element name="conditions">
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="add">
+                          <xs:element maxOccurs="unbounded" name="add">
                             <xs:complexType>
                               <xs:attribute name="input" type="xs:string" use="required" />
                               <xs:attribute name="pattern" type="xs:string" use="required" />
                             </xs:complexType>
                           </xs:element>
                         </xs:sequence>
+                        <xs:attribute name="trackAllCaptures" type="xs:boolean" use="optional" />
                       </xs:complexType>
                     </xs:element>
                     <xs:element name="action">
