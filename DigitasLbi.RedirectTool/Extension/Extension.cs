@@ -34,8 +34,30 @@ namespace DigitasLbi.RedirectTool.Extension
             return table;
         }
 
+        public static DataTable ToDataTable(this rewrite xml)
+        {
+            string existingUrl = "ExistingUrl";
+            string newUrl = "NewUrl";
+            string status = "Status";
 
-        public static List<T> GetClassFromExcel<T>(this ExcelPackage package , int fromRow=2, int fromColumn=1, int toColumn = 0)
+            DataTable table = new DataTable
+            {
+                Columns = { new DataColumn(existingUrl), new DataColumn(newUrl), new DataColumn(status) }
+            };
+
+            foreach (rewriteRule rule in xml.rules)
+            {
+                var newRow = table.NewRow();
+                newRow[newUrl] = rule.action.url;
+                newRow[existingUrl] = string.Join("", rule.conditions.add.Select(i => i.pattern));
+                newRow[status] = "Ok";
+                table.Rows.Add(newRow);
+            }
+            return table;
+        }
+
+
+        public static List<T> GetClassFromExcel<T>(this ExcelPackage package, int fromRow = 2, int fromColumn = 1, int toColumn = 0)
         {
             List<T> retList = new List<T>();
 

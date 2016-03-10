@@ -123,6 +123,10 @@ namespace DigitasLbi.RedirectTool.ViewModel
                     Message = msg;
                 }
 
+                var ad = Helper.Helper.ValidateRewriteRules(ExcelDestinationPath);
+
+
+
             }, () => true);
 
             StatusFlag = Constant.Constant.MesasgeColor.Default;
