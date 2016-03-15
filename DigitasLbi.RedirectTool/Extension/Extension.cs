@@ -39,6 +39,7 @@ namespace DigitasLbi.RedirectTool.Extension
             string existingUrl = "ExistingUrl";
             string newUrl = "NewUrl";
             string status = "Status";
+            string hostname = "www.lloydsbankinggroup.com";
 
             DataTable table = new DataTable
             {
@@ -49,8 +50,8 @@ namespace DigitasLbi.RedirectTool.Extension
             {
                 var newRow = table.NewRow();
                 newRow[newUrl] = rule.action.url;
-                newRow[existingUrl] = string.Join("", rule.conditions.add.Select(i => i.pattern));
-                newRow[status] = "Ok";
+                newRow[existingUrl] = hostname + rule.conditions.add.First().pattern ;
+                //newRow[status] = "Ok";
                 table.Rows.Add(newRow);
             }
             return table;

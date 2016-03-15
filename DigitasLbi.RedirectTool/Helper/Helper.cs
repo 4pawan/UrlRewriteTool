@@ -34,21 +34,21 @@ namespace DigitasLbi.RedirectTool.Helper
                     {
                         stopProcessing = true,
                         name = "rule" + i,
-                        patternSyntax = "ECMAScript",
+                        patternSyntax = "Wildcard",
                         match = new rewriteRuleMatch
                         {
-                            url = ".*"
+                            url = "*"
                         },
                         conditions = new rewriteRuleConditions
                         {
-                            trackAllCaptures = true,
+                            //trackAllCaptures = true,
                             add = new List<rewriteRuleConditionsAdd>
                             {
-                                 new rewriteRuleConditionsAdd
-                                 {
-                                    input = "{HTTP_HOST}",
-                                    pattern = existingUrl.Host
-                                 },
+                                 //new rewriteRuleConditionsAdd
+                                 //{
+                                 //   input = "{HTTP_HOST}",
+                                 //   pattern = existingUrl.Host
+                                 //},
                                  new rewriteRuleConditionsAdd
                                  {
                                     input = "{URL}",
@@ -80,12 +80,16 @@ namespace DigitasLbi.RedirectTool.Helper
 
         public static async Task ValidateRewriteRules(string xmlPathToSave)
         {
-            rewrite aa = (rewrite)new XmlSerializer(typeof(rewrite)).Deserialize(new StreamReader(xmlPathToSave));
+            rewrite output = (rewrite)new XmlSerializer(typeof(rewrite)).Deserialize(new StreamReader(xmlPathToSave));
 
-            var dt = aa.ToDataTable();
-            DataTableToExcel(@"C:\Users\pawsingh\Desktop\test.xlsx", dt);
-            string status = await DownloadPageAsync(dt.Rows[0][0].ToString());
+            var dt = output.ToDataTable();
 
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                dt.Rows[i][2] = await ValidateRuleAsync(dt.Rows[i][0].ToString());
+            }
+
+            DataTableToExcel(xmlPathToSave.Replace(".xml", ".xlsx"), dt);
         }
 
         public static void DataTableToExcel(string excelDestinationPath, DataTable dt)
@@ -103,10 +107,10 @@ namespace DigitasLbi.RedirectTool.Helper
                     rng.Style.Fill.BackgroundColor.SetColor((System.Drawing.Color.Gray));
                     rng.Style.Font.Color.SetColor(System.Drawing.Color.Green);
                 }
-            
+
                 ExcelAddress formatRangeAddress = new ExcelAddress("C2:C" + (dt.Rows.Count + 1));
 
-                string statement1 = "=$C1='Completed'";
+                string statement1 = "SEARCH(ROW(),'OK')";
                 var cond1 = ws.ConditionalFormatting.AddExpression(formatRangeAddress);
                 cond1.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
                 cond1.Style.Fill.BackgroundColor.Color = System.Drawing.Color.Green;
@@ -124,30 +128,14 @@ namespace DigitasLbi.RedirectTool.Helper
         }
 
 
-        private static async Task<string> DownloadPageAsync(string url)
+        private static async Task<string> ValidateRuleAsync(string url)
         {
             try
             {
                 url = "http://" + url;
                 var httpClient = new HttpClient();
-                var respdonse = await httpClient.GetAsync(url);
-
-                //using (HttpClient client = new HttpClient())
-                //using (HttpResponseMessage response = await client.GetAsync(url))
-                //using (HttpContent content = response.Content)
-                //{
-                //    // ... Read the string.
-                //    string result = await content.ReadAsStringAsync();
-
-                //    // ... Display the result.
-                //    if (result != null &&
-                //        result.Length >= 50)
-                //    {
-                //        Console.WriteLine(result.Substring(0, 50) + "...");
-                //    }
-                //}
-
-                return "OK";
+                var response = await httpClient.GetAsync(url);
+                return response.IsSuccessStatusCode ? "OK" : "Error";
             }
             catch (Exception ex)
             {

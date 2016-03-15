@@ -18,6 +18,9 @@ namespace DigitasLbi.RedirectTool.ViewModel
         public ICommand ShowDialogToSelectExcel { get; set; }
         public ICommand ShowSaveDialog { get; set; }
         public ICommand UrlRewriteUtilityCommand { get; set; }
+        public ICommand ValidateRewriteRuleCommand { get; set; }
+
+
 
         public Constant.Constant.MesasgeColor StatusFlag
         {
@@ -123,10 +126,12 @@ namespace DigitasLbi.RedirectTool.ViewModel
                     Message = msg;
                 }
 
+            }, () => true);
+
+            ValidateRewriteRuleCommand = new RelayCommand(() =>
+            {
                 var ad = Helper.Helper.ValidateRewriteRules(ExcelDestinationPath);
-
-
-
+                Message = "Report created.";
             }, () => true);
 
             StatusFlag = Constant.Constant.MesasgeColor.Default;

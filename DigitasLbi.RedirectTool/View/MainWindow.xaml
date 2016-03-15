@@ -21,6 +21,7 @@
             <RowDefinition Height="40*"/>
             <RowDefinition Height="38*"/>
             <RowDefinition Height="37*"/>
+            <RowDefinition Height="37*"/>
             <RowDefinition Height="258*"/>
         </Grid.RowDefinitions>
         <Grid.Resources>
@@ -37,7 +38,7 @@
         <TextBox Text="{Binding ExcelSourcePath, Mode=TwoWay}"  Grid.Row="1" Margin="183,7,0,0"/>
         <Button Name="BtnDestination"  Content="Please select path to save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Margin="17,8,0,0" Command="{Binding ShowSaveDialog}" Grid.Row="2" />
         <TextBox Text="{Binding ExcelDestinationPath, Mode=TwoWay}"  Grid.Row="2" Margin="183,8,0,0"/>
-        <TextBlock  Margin="17,13,41,10"  Text="{Binding Message,Mode=TwoWay}" Background="{Binding StatusFlag, Mode=TwoWay, Converter={StaticResource StringToColorConverter}}" Grid.Row="4">
+        <TextBlock  Margin="17,13,41,10"  Text="{Binding Message,Mode=TwoWay}" Background="{Binding StatusFlag, Mode=TwoWay, Converter={StaticResource StringToColorConverter}}" Grid.Row="5">
             <!--<TextBlock.Style>
                 <Style TargetType="TextBlock">
                     <Setter Property="Background"  Value="White"/>
@@ -70,6 +71,8 @@
                     </Style.Triggers>
                 </Style>
             </Button.Style>
+        </Button>
+        <Button Content="Validate xml" HorizontalAlignment="Left" VerticalAlignment="Top" Width="484" Margin="17,7.4,0,0" Command="{Binding ValidateRewriteRuleCommand}" Grid.Row="4">
         </Button>
     </Grid>
 </Window>
