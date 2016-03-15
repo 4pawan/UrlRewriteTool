@@ -128,9 +128,9 @@ namespace DigitasLbi.RedirectTool.ViewModel
 
             }, () => true);
 
-            ValidateRewriteRuleCommand = new RelayCommand(() =>
+            ValidateRewriteRuleCommand = new RelayCommand(async () =>
             {
-                var ad = Helper.Helper.ValidateRewriteRules(ExcelDestinationPath);
+                await Helper.Helper.ValidateRewriteRulesAsync(ExcelDestinationPath);
                 Message = "Report created.";
             }, () => true);
 

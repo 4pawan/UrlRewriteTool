@@ -78,7 +78,7 @@ namespace DigitasLbi.RedirectTool.Helper
             }
         }
 
-        public static async Task ValidateRewriteRules(string xmlPathToSave)
+        public static async Task ValidateRewriteRulesAsync(string xmlPathToSave)
         {
             rewrite output = (rewrite)new XmlSerializer(typeof(rewrite)).Deserialize(new StreamReader(xmlPathToSave));
 
@@ -88,8 +88,8 @@ namespace DigitasLbi.RedirectTool.Helper
             {
                 dt.Rows[i][2] = await ValidateRuleAsync(dt.Rows[i][0].ToString());
             }
-
             DataTableToExcel(xmlPathToSave.Replace(".xml", ".xlsx"), dt);
+
         }
 
         public static void DataTableToExcel(string excelDestinationPath, DataTable dt)
