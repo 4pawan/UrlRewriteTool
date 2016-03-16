@@ -94,7 +94,8 @@ namespace DigitasLbi.RedirectTool.Helper
 
         public static void DataTableToExcel(string excelDestinationPath, DataTable dt)
         {
-            using (ExcelPackage pck = new ExcelPackage(new FileInfo(excelDestinationPath)))
+            FileInfo fileInfo = new FileInfo(excelDestinationPath);
+            using (ExcelPackage pck = new ExcelPackage(fileInfo))
             {
                 ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
                 ws.Cells["A1"].LoadFromDataTable(dt, true);
@@ -122,7 +123,7 @@ namespace DigitasLbi.RedirectTool.Helper
                 cond2.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
                 cond2.Style.Fill.BackgroundColor.Color = System.Drawing.Color.Red;
                 cond2.Formula = statement2;
-
+                if (fileInfo.Exists) fileInfo.Delete();
                 pck.Save();
             }
         }
