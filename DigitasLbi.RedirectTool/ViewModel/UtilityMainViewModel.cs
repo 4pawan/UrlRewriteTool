@@ -130,6 +130,7 @@ namespace DigitasLbi.RedirectTool.ViewModel
 
             ValidateRewriteRuleCommand = new RelayCommand(async () =>
             {
+                Message = "We are working on report...Please wait !";
                 await Helper.Helper.ValidateRewriteRulesAsync(ExcelDestinationPath);
                 Message = "Report created.";
             }, () => true);
