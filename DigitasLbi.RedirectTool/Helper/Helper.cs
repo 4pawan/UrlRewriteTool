@@ -95,6 +95,7 @@ namespace DigitasLbi.RedirectTool.Helper
         public static void DataTableToExcel(string excelDestinationPath, DataTable dt)
         {
             FileInfo fileInfo = new FileInfo(excelDestinationPath);
+            if (fileInfo.Exists) fileInfo.Delete();
             using (ExcelPackage pck = new ExcelPackage(fileInfo))
             {
                 ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
@@ -111,19 +112,18 @@ namespace DigitasLbi.RedirectTool.Helper
 
                 ExcelAddress formatRangeAddress = new ExcelAddress("C2:C" + (dt.Rows.Count + 1));
 
-                string statement1 = "SEARCH(ROW(),'OK')";
+                string statement1 = "ISNUMBER(FIND(OK,ROW()))";   
                 var cond1 = ws.ConditionalFormatting.AddExpression(formatRangeAddress);
                 cond1.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
                 cond1.Style.Fill.BackgroundColor.Color = System.Drawing.Color.Green;
                 cond1.Formula = statement1;
 
-
-                string statement2 = "MOD(ROW(),2)<>0";
+                string statement2 = "ISNUMBER(FIND(Error,ROW()))";     //"MOD(ROW(),2)<>0";
                 var cond2 = ws.ConditionalFormatting.AddExpression(formatRangeAddress);
                 cond2.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
                 cond2.Style.Fill.BackgroundColor.Color = System.Drawing.Color.Red;
                 cond2.Formula = statement2;
-                if (fileInfo.Exists) fileInfo.Delete();
+
                 pck.Save();
             }
         }
