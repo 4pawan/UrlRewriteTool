@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace DigitasLbi.RedirectTool.ViewModel
         public ICommand UrlRewriteUtilityCommand { get; set; }
         public ICommand ValidateRewriteRuleCommand { get; set; }
 
+        public string ValidationTemplate { get; set; } = "verification started for Rule{0}\nExisting url : {1}\nNew url :{2}\nResult :InProgress";
+        public string ValidationDoneTemplate { get; set; } = "verification done for Rule{0}\nExisting url : {1}\nNew url :{2}\nResult :{3}";
 
 
         public Constant.Constant.MesasgeColor StatusFlag
@@ -132,22 +135,28 @@ namespace DigitasLbi.RedirectTool.ViewModel
             ValidateRewriteRuleCommand = new RelayCommand(async () =>
             {
                 Message = "We are working on report...Please wait !";
+                StatusFlag = Constant.Constant.MesasgeColor.Default;
                 DataTable dt = Helper.Helper.GetDataTableFromXml(ExcelDestinationPath);
+                string validationDoneTxt = "";
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    Message = "Rule"+ i + " started !";
+                    string validationTxt = string.Format(ValidationTemplate, i, dt.Rows[i][0], dt.Rows[i][1]);
+
+                    if (i > 0)
+                    {
+                        validationDoneTxt = string.Format(ValidationDoneTemplate, i - 1, dt.Rows[i - 1][0], dt.Rows[i - 1][1], dt.Rows[i - 1][2]);
+                        //Debug.WriteLine("------> validationDoneTxt :" + dt.Rows[i-1][2]);
+                    }
+                    Message = string.Format("{0}\n\n{1}", validationTxt, validationDoneTxt);
                     dt.Rows[i][2] = await Helper.Helper.ValidateRuleAsync(dt.Rows[i][0].ToString());
-                    Message = "Rule" + i + " finished !";
+                    //Debug.WriteLine("------> dt.Rows[i][2] :" + dt.Rows[i][2]);
+                    // Message = "Rule" + i + " finished !";
                 }
+                Message = "Validation done. Now, generating report.";
                 Helper.Helper.DataTableToExcel(ExcelDestinationPath.Replace(".xml", ".xlsx"), dt);
                 Message = "Report created.";
-
-
-
-
-
-
+                StatusFlag = Constant.Constant.MesasgeColor.InProcess ;
             }, () => true);
 
             StatusFlag = Constant.Constant.MesasgeColor.Default;
