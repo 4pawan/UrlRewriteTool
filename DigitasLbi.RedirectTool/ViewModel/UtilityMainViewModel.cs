@@ -135,7 +135,7 @@ namespace DigitasLbi.RedirectTool.ViewModel
             ValidateRewriteRuleCommand = new RelayCommand(async () =>
             {
                 Message = "We are working on report...Please wait !";
-                StatusFlag = Constant.Constant.MesasgeColor.Default;
+                StatusFlag = Constant.Constant.MesasgeColor.InProcess;
                 DataTable dt = Helper.Helper.GetDataTableFromXml(ExcelDestinationPath);
                 string validationDoneTxt = "";
 
@@ -156,7 +156,7 @@ namespace DigitasLbi.RedirectTool.ViewModel
                 Message = "Validation done. Now, generating report.";
                 Helper.Helper.DataTableToExcel(ExcelDestinationPath.Replace(".xml", ".xlsx"), dt);
                 Message = "Report created.";
-                StatusFlag = Constant.Constant.MesasgeColor.InProcess ;
+                StatusFlag = Constant.Constant.MesasgeColor.Green ;
             }, () => true);
 
             StatusFlag = Constant.Constant.MesasgeColor.Default;
