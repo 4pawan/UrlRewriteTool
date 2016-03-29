@@ -77,19 +77,13 @@ namespace DigitasLbi.RedirectTool.Helper
                 return $"{Constant.Constant.Mesasge.Fail} : Message :{ex.Message}\nSource :{ex.Source} \nStackTrace : {ex.StackTrace}";
             }
         }
-
-        public static async Task ValidateRewriteRulesAsync(string xmlPathToSave)
+       
+        public static DataTable GetDataTableFromXml(string xmlPathToSave)
         {
             rewrite output = (rewrite)new XmlSerializer(typeof(rewrite)).Deserialize(new StreamReader(xmlPathToSave));
-
             var dt = output.ToDataTable();
 
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                dt.Rows[i][2] = await ValidateRuleAsync(dt.Rows[i][0].ToString());
-            }
-            DataTableToExcel(xmlPathToSave.Replace(".xml", ".xlsx"), dt);
-
+            return dt;
         }
 
         public static void DataTableToExcel(string excelDestinationPath, DataTable dt)
@@ -110,26 +104,26 @@ namespace DigitasLbi.RedirectTool.Helper
                     rng.Style.Font.Color.SetColor(System.Drawing.Color.Green);
                 }
 
-                ExcelAddress formatRangeAddress = new ExcelAddress("C2:C" + (dt.Rows.Count + 1));
+                //ExcelAddress formatRangeAddress = new ExcelAddress("C2:C" + (dt.Rows.Count + 1));
 
-                string statement1 = "ISNUMBER(FIND(OK,ROW()))";   
-                var cond1 = ws.ConditionalFormatting.AddExpression(formatRangeAddress);
-                cond1.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                cond1.Style.Fill.BackgroundColor.Color = System.Drawing.Color.Green;
-                cond1.Formula = statement1;
+                //string statement1 = "ISNUMBER(FIND(OdsK1,ROW()))";   
+                //var cond1 = ws.ConditionalFormatting.AddExpression(formatRangeAddress);
+                //cond1.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                //cond1.Style.Fill.BackgroundColor.Color = System.Drawing.Color.Green;
+                //cond1.Formula = statement1;
 
-                string statement2 = "ISNUMBER(FIND(Error,ROW()))";     //"MOD(ROW(),2)<>0";
-                var cond2 = ws.ConditionalFormatting.AddExpression(formatRangeAddress);
-                cond2.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                cond2.Style.Fill.BackgroundColor.Color = System.Drawing.Color.Red;
-                cond2.Formula = statement2;
+                //string statement2 = "ISNUMBER(SEARCH(ROW(),'Error'))";     //"MOD(ROW(),2)<>0"; =SEARCH(ROW();'OK')  =MOD(ROW();2)<>0
+                //var cond2 = ws.ConditionalFormatting.AddExpression(formatRangeAddress);
+                //cond2.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                //cond2.Style.Fill.BackgroundColor.Color = System.Drawing.Color.Red;
+                //cond2.Formula = statement2;
 
                 pck.Save();
             }
         }
 
 
-        private static async Task<string> ValidateRuleAsync(string url)
+        public static async Task<string> ValidateRuleAsync(string url)
         {
             try
             {

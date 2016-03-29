@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -131,8 +132,22 @@ namespace DigitasLbi.RedirectTool.ViewModel
             ValidateRewriteRuleCommand = new RelayCommand(async () =>
             {
                 Message = "We are working on report...Please wait !";
-                await Helper.Helper.ValidateRewriteRulesAsync(ExcelDestinationPath);
+                DataTable dt = Helper.Helper.GetDataTableFromXml(ExcelDestinationPath);
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Message = "Rule"+ i + " started !";
+                    dt.Rows[i][2] = await Helper.Helper.ValidateRuleAsync(dt.Rows[i][0].ToString());
+                    Message = "Rule" + i + " finished !";
+                }
+                Helper.Helper.DataTableToExcel(ExcelDestinationPath.Replace(".xml", ".xlsx"), dt);
                 Message = "Report created.";
+
+
+
+
+
+
             }, () => true);
 
             StatusFlag = Constant.Constant.MesasgeColor.Default;
