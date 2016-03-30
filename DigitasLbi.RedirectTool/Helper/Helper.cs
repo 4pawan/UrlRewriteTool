@@ -77,7 +77,7 @@ namespace DigitasLbi.RedirectTool.Helper
                 return $"{Constant.Constant.Mesasge.Fail} : Message :{ex.Message}\nSource :{ex.Source} \nStackTrace : {ex.StackTrace}";
             }
         }
-       
+
         public static DataTable GetDataTableFromXml(string xmlPathToSave)
         {
             rewrite output = (rewrite)new XmlSerializer(typeof(rewrite)).Deserialize(new StreamReader(xmlPathToSave));
@@ -123,14 +123,17 @@ namespace DigitasLbi.RedirectTool.Helper
         }
 
 
-        public static async Task<string> ValidateRuleAsync(string url)
+        public static async Task<string> ValidateRuleAsync(string existingUrl, string expectedUrl)
         {
             try
             {
-                url = "http://" + url;
+                existingUrl = "http://" + existingUrl;
                 var httpClient = new HttpClient();
-                var response = await httpClient.GetAsync(url);
-                return response.IsSuccessStatusCode ? "OK" : "Error";
+                var response = await httpClient.GetAsync(existingUrl);
+                return response.IsSuccessStatusCode &&
+                       response.RequestMessage.RequestUri.AbsoluteUri.ToLower().Contains(expectedUrl.ToLower())
+                    ? "Ok"
+                    : "Error";
             }
             catch (Exception ex)
             {

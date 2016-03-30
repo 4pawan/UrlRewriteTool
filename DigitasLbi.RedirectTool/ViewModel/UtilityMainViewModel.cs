@@ -149,14 +149,15 @@ namespace DigitasLbi.RedirectTool.ViewModel
                         //Debug.WriteLine("------> validationDoneTxt :" + dt.Rows[i-1][2]);
                     }
                     Message = string.Format("{0}\n\n{1}", validationTxt, validationDoneTxt);
-                    dt.Rows[i][2] = await Helper.Helper.ValidateRuleAsync(dt.Rows[i][0].ToString());
+                    dt.Rows[i][2] = await Helper.Helper.ValidateRuleAsync(dt.Rows[i][0].ToString(), dt.Rows[i][1].ToString());
                     //Debug.WriteLine("------> dt.Rows[i][2] :" + dt.Rows[i][2]);
                     // Message = "Rule" + i + " finished !";
                 }
                 Message = "Validation done. Now, generating report.";
-                Helper.Helper.DataTableToExcel(ExcelDestinationPath.Replace(".xml", ".xlsx"), dt);
-                Message = "Report created.";
-                StatusFlag = Constant.Constant.MesasgeColor.Green ;
+                string excelToBeSavedAtLocation = ExcelDestinationPath.Replace(".xml", ".xlsx");
+                Helper.Helper.DataTableToExcel(excelToBeSavedAtLocation, dt);
+                Message = "Report created and can be downloaded from location :\n" + excelToBeSavedAtLocation;
+                StatusFlag = Constant.Constant.MesasgeColor.Green;
             }, () => true);
 
             StatusFlag = Constant.Constant.MesasgeColor.Default;
