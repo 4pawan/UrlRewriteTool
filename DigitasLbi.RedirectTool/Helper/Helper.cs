@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -101,7 +102,7 @@ namespace DigitasLbi.RedirectTool.Helper
                     rng.Style.Font.Bold = true;
                     rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
                     rng.Style.Fill.BackgroundColor.SetColor((System.Drawing.Color.Gray));
-                    rng.Style.Font.Color.SetColor(System.Drawing.Color.Green);
+                    rng.Style.Font.Color.SetColor(System.Drawing.Color.White);
                 }
 
                 //ExcelAddress formatRangeAddress = new ExcelAddress("C2:C" + (dt.Rows.Count + 1));
@@ -130,6 +131,7 @@ namespace DigitasLbi.RedirectTool.Helper
                 existingUrl = "http://" + existingUrl;
                 var httpClient = new HttpClient();
                 var response = await httpClient.GetAsync(existingUrl);
+
                 return response.IsSuccessStatusCode &&
                        response.RequestMessage.RequestUri.AbsoluteUri.ToLower().Contains(expectedUrl.ToLower())
                     ? "Ok"
