@@ -89,7 +89,6 @@ C:\Project\Temp\WPF\RedirectTool\DigitasLbi.RedirectTool\UrlRewriteTool\DigitasL
 C:\Project\Temp\WPF\RedirectTool\DigitasLbi.RedirectTool\UrlRewriteTool\DigitasLbi.RedirectTool\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 C:\Project\Temp\WPF\RedirectTool\DigitasLbi.RedirectTool\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.exe.manifest
 C:\Project\Temp\WPF\RedirectTool\DigitasLbi.RedirectTool\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.application
-C:\Project\Temp\WPF\RedirectTool\DigitasLbi.RedirectTool\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.csprojResolveAssemblyReference.cache
 C:\Project\Temp\UrlRewriteTool\DigitasLbi.RedirectTool\bin\Debug\DigitasLbi.RedirectTool.exe.config
 C:\Project\Temp\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.exe
 C:\Project\Temp\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.pdb
@@ -124,3 +123,4 @@ C:\Project\Temp\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.Redi
 C:\Project\Temp\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.csproj.GenerateResource.Cache
 C:\Project\Temp\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.exe.manifest
 C:\Project\Temp\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.application
+C:\Project\Temp\WPF\RedirectTool\DigitasLbi.RedirectTool\UrlRewriteTool\DigitasLbi.RedirectTool\obj\Debug\DigitasLbi.RedirectTool.csprojResolveAssemblyReference.cache

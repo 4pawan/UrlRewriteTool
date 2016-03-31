@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Xml.Serialization;
@@ -79,12 +80,32 @@ namespace DigitasLbi.RedirectTool.Helper
             }
         }
 
-        public static DataTable GetDataTableFromXml(string xmlPathToSave)
+        public static DataTable GetDataTableFromXml(string xmlPath)
         {
-            rewrite output = (rewrite)new XmlSerializer(typeof(rewrite)).Deserialize(new StreamReader(xmlPathToSave));
+            rewrite output = ReadRewriteXml(xmlPath);
             var dt = output.ToDataTable();
 
             return dt;
+        }
+
+        public static void ConfigureRewriteRule(string xmlPath, string pathToConfigure)
+        {
+
+            string xml = File.ReadAllText(xmlPath);
+
+            int index1 = xml.IndexOf("rules", StringComparison.Ordinal);
+            int index2 = xml.LastIndexOf("rules", StringComparison.Ordinal);
+
+            string xmsdl = xml.Substring(index1, xml.Length - index2 + index1);
+
+            string xmsasddl = xml.Substring(0, index2 - 2);
+
+        }
+
+
+        private static rewrite ReadRewriteXml(string xmlPath)
+        {
+            return (rewrite)new XmlSerializer(typeof(rewrite)).Deserialize(new StreamReader(xmlPath));
         }
 
         public static void DataTableToExcel(string excelDestinationPath, DataTable dt)

@@ -21,6 +21,7 @@ namespace DigitasLbi.RedirectTool.ViewModel
         public ICommand ShowSaveDialog { get; set; }
         public ICommand UrlRewriteUtilityCommand { get; set; }
         public ICommand ValidateRewriteRuleCommand { get; set; }
+        public ICommand ConfigureRewriteRuleCommand { get; set; }
 
         public string ValidationTemplate { get; set; } = "verification started for Rule{0}\nExisting url : {1}\nNew url :{2}\nResult :InProgress";
         public string ValidationDoneTemplate { get; set; } = "verification done for Rule{0}\nExisting url : {1}\nNew url :{2}\nResult :{3}";
@@ -69,6 +70,8 @@ namespace DigitasLbi.RedirectTool.ViewModel
                 OnPropertyChanged();
             }
         }
+
+
 
         public UtilityMainViewModel()
         {
@@ -132,6 +135,23 @@ namespace DigitasLbi.RedirectTool.ViewModel
 
             }, () => true);
 
+            ConfigureRewriteRuleCommand = new RelayCommand(() =>
+            {
+                SaveFileDialog savedlg = new SaveFileDialog
+                {
+                    Filter = "config files (*.config)|*.config|All files (*.*)|*.*",
+                    FilterIndex = 1,
+                    RestoreDirectory = true
+                };
+
+                if (savedlg.ShowDialog() == true)
+                {
+                    Helper.Helper.ConfigureRewriteRule(ExcelDestinationPath, savedlg.FileName);
+                    Message = "Rewrite output file kept at location:\n" + savedlg.FileName;
+                }
+
+            }, () => true);
+
             ValidateRewriteRuleCommand = new RelayCommand(async () =>
             {
                 Message = "We are working on report...Please wait !";
@@ -146,12 +166,9 @@ namespace DigitasLbi.RedirectTool.ViewModel
                     if (i > 0)
                     {
                         validationDoneTxt = string.Format(ValidationDoneTemplate, i - 1, dt.Rows[i - 1][0], dt.Rows[i - 1][1], dt.Rows[i - 1][2]);
-                        //Debug.WriteLine("------> validationDoneTxt :" + dt.Rows[i-1][2]);
                     }
-                    Message = string.Format("{0}\n\n{1}", validationTxt, validationDoneTxt);
+                    Message += string.Format("{0}\n\n{1}", validationTxt, validationDoneTxt);
                     dt.Rows[i][2] = await Helper.Helper.ValidateRuleAsync(dt.Rows[i][0].ToString(), dt.Rows[i][1].ToString());
-                    //Debug.WriteLine("------> dt.Rows[i][2] :" + dt.Rows[i][2]);
-                    // Message = "Rule" + i + " finished !";
                 }
                 Message = "Validation done. Now, generating report.";
                 string excelToBeSavedAtLocation = ExcelDestinationPath.Replace(".xml", ".xlsx");
