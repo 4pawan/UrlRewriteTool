@@ -27,10 +27,6 @@ namespace DigitasLbi.RedirectTool.ViewModel
         public ICommand ValidateRewriteRuleCommand { get; set; }
         public ICommand ConfigureRewriteRuleCommand { get; set; }
 
-        public string ValidationTemplate { get; set; } = "verification started for Rule{0}\nExisting url : {1}\nNew url :{2}\nResult :InProgress";
-        public string ValidationDoneTemplate { get; set; } = "verification done for Rule{0}\nExisting url : {1}\nNew url :{2}\nResult :{3}";
-
-
         public Constant.Constant.MesasgeColor StatusFlag
         {
             get
@@ -185,7 +181,7 @@ namespace DigitasLbi.RedirectTool.ViewModel
                 if (savedlg.ShowDialog() == true)
                 {
                     Helper.Helper.ConfigureRewriteRule(ExcelDestinationPath, savedlg.FileName);
-                    Message = "Rewrite output file kept at location:\n" + savedlg.FileName;
+                    Message = Constant.Constant.Utility.ConfigKeptAtLoc + "\n" + savedlg.FileName;
                     IsValidateXmlEnabled = true;
                 }
 
@@ -197,26 +193,26 @@ namespace DigitasLbi.RedirectTool.ViewModel
                 IsConfigXmlEnabled = false;
                 IsValidateXmlEnabled = false;
 
-                Message = "We are working on report...Please wait !\n";
+                Message = Constant.Constant.Utility.WorkingOnReport + "\n\n";
                 StatusFlag = Constant.Constant.MesasgeColor.InProcess;
                 DataTable dt = Helper.Helper.GetDataTableFromXml(ExcelDestinationPath);
                 string validationDoneTxt = "";
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    string validationTxt = string.Format(ValidationTemplate, i, dt.Rows[i][0], dt.Rows[i][1]);
+                    string validationTxt = string.Format(Constant.Constant.Template.ValidationTemplate, i);
 
                     if (i > 0)
                     {
-                        validationDoneTxt = string.Format(ValidationDoneTemplate, i - 1, dt.Rows[i - 1][0], dt.Rows[i - 1][1], dt.Rows[i - 1][2]);
+                        validationDoneTxt = string.Format(Constant.Constant.Template.ValidationDoneTemplate, i - 1, dt.Rows[i - 1][2]);
                     }
-                    Message = string.Format("{0}\n\n{1}", validationTxt, validationDoneTxt);
+                    Message += $"{validationDoneTxt}{validationTxt}";
                     dt.Rows[i][2] = await Helper.Helper.ValidateRuleAsync(dt.Rows[i][0].ToString(), dt.Rows[i][1].ToString());
                 }
-                Message = "Validation done. Now, generating report.";
+                Message = Constant.Constant.Utility.GeneratingReport;
                 string excelToBeSavedAtLocation = ExcelDestinationPath.Replace(".xml", ".xlsx");
                 Helper.Helper.DataTableToExcel(excelToBeSavedAtLocation, dt);
-                Message = "Report created and can be downloaded from location :\n" + excelToBeSavedAtLocation;
+                Message = Constant.Constant.Utility.ReportGenerationDone + "\n" + excelToBeSavedAtLocation;
                 StatusFlag = Constant.Constant.MesasgeColor.Green;
 
                 IsGenerateXmlEnabled = true;
