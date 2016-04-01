@@ -90,16 +90,11 @@ namespace DigitasLbi.RedirectTool.Helper
 
         public static void ConfigureRewriteRule(string xmlPath, string pathToConfigure)
         {
-
             string xml = File.ReadAllText(xmlPath);
-
             int index1 = xml.IndexOf("rules", StringComparison.Ordinal);
             int index2 = xml.LastIndexOf("rules", StringComparison.Ordinal);
-
-            string xmsdl = xml.Substring(index1, xml.Length - index2 + index1);
-
-            string xmsasddl = xml.Substring(0, index2 - 2);
-
+            xml = xml.Substring(index1 - 1, index2 - index1 - 2);
+            File.WriteAllText(pathToConfigure, xml);
         }
 
 
@@ -114,17 +109,8 @@ namespace DigitasLbi.RedirectTool.Helper
             if (fileInfo.Exists) fileInfo.Delete();
             using (ExcelPackage pck = new ExcelPackage(fileInfo))
             {
-                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
-                ws.Cells["A1"].LoadFromDataTable(dt, true);
-
-                //Format the header for column 1-3
-                using (ExcelRange rng = ws.Cells["A1:C1"])
-                {
-                    rng.Style.Font.Bold = true;
-                    rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    rng.Style.Fill.BackgroundColor.SetColor((System.Drawing.Color.Gray));
-                    rng.Style.Font.Color.SetColor(System.Drawing.Color.White);
-                }
+                InitialiseReportSheet(dt, pck);
+                InitialiseErrorSheet(dt, pck);
 
                 //ExcelAddress formatRangeAddress = new ExcelAddress("C2:C" + (dt.Rows.Count + 1));
 
@@ -142,6 +128,39 @@ namespace DigitasLbi.RedirectTool.Helper
 
                 pck.Save();
             }
+        }
+
+        private static void InitialiseReportSheet(DataTable dt, ExcelPackage pck)
+        {
+            ExcelWorksheet wsReport = pck.Workbook.Worksheets.Add("Report");
+            wsReport.Cells["A1"].LoadFromDataTable(dt, true);
+
+            //Format the header for column 1-3
+            using (ExcelRange rng = wsReport.Cells["A1:C1"])
+            {
+                FormatExcel(rng);
+            }
+        }
+
+        private static void InitialiseErrorSheet(DataTable dt, ExcelPackage pck)
+        {
+            ExcelWorksheet wsError = pck.Workbook.Worksheets.Add("Error");
+            var dtError = dt.AsEnumerable().Where(r => r.Field<string>(2) == "Error").CopyToDataTable();
+            wsError.Cells["A1"].LoadFromDataTable(dtError, true);
+
+            //Format the header for column 1-3
+            using (ExcelRange rng = wsError.Cells["A1:C1"])
+            {
+                FormatExcel(rng);
+            }
+        }
+
+        private static void FormatExcel(ExcelRange rng)
+        {
+            rng.Style.Font.Bold = true;
+            rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
+            rng.Style.Fill.BackgroundColor.SetColor((System.Drawing.Color.Gray));
+            rng.Style.Font.Color.SetColor(System.Drawing.Color.White);
         }
 
 

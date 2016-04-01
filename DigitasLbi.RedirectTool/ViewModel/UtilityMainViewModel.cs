@@ -154,7 +154,7 @@ namespace DigitasLbi.RedirectTool.ViewModel
 
             ValidateRewriteRuleCommand = new RelayCommand(async () =>
             {
-                Message = "We are working on report...Please wait !";
+                Message = "We are working on report...Please wait !\n";
                 StatusFlag = Constant.Constant.MesasgeColor.InProcess;
                 DataTable dt = Helper.Helper.GetDataTableFromXml(ExcelDestinationPath);
                 string validationDoneTxt = "";
