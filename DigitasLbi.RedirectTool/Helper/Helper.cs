@@ -93,7 +93,7 @@ namespace DigitasLbi.RedirectTool.Helper
             string xml = File.ReadAllText(xmlPath);
             int index1 = xml.IndexOf("rules", StringComparison.Ordinal);
             int index2 = xml.LastIndexOf("rules", StringComparison.Ordinal);
-            xml = xml.Substring(index1 - 1, index2 - index1 - 2);
+            xml = xml.Substring(index1 - 1, index2 - index1 + 7);
             File.WriteAllText(pathToConfigure, xml);
         }
 
