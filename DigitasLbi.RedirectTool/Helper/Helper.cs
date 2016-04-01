@@ -172,6 +172,9 @@ namespace DigitasLbi.RedirectTool.Helper
                 var httpClient = new HttpClient();
                 var response = await httpClient.GetAsync(existingUrl);
 
+                //if (existingUrl.Contains("www.lloydsbankinggroup.com/Media/Press-Releases/2014/halifax/brits-more-positive-about-putting-homes-up-for-sale/"))
+                //    Debugger.Break();
+
                 return response.IsSuccessStatusCode && System.Net.WebUtility.UrlDecode(response.RequestMessage.RequestUri.AbsoluteUri.ToLower())
                        .Contains(System.Net.WebUtility.UrlDecode(expectedUrl.ToLower()))
                     ? "Ok"

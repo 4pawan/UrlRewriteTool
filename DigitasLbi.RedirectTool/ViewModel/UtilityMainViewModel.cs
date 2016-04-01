@@ -18,6 +18,9 @@ namespace DigitasLbi.RedirectTool.ViewModel
         private string _excelDestinationPath;
         private string _message;
         private Constant.Constant.MesasgeColor _statusFlag;
+        private bool _isConfigXmlEnabled;
+        private bool _isValidateXmlEnabled;
+        private bool _isGenerateXmlEnabled;
         public ICommand ShowDialogToSelectExcel { get; set; }
         public ICommand ShowSaveDialog { get; set; }
         public ICommand UrlRewriteUtilityCommand { get; set; }
@@ -59,6 +62,8 @@ namespace DigitasLbi.RedirectTool.ViewModel
             {
                 _excelSourcePath = value;
                 OnPropertyChanged();
+                IsConfigXmlEnabled = false;
+                IsValidateXmlEnabled = false;
             }
         }
 
@@ -69,13 +74,45 @@ namespace DigitasLbi.RedirectTool.ViewModel
             {
                 _excelDestinationPath = value;
                 OnPropertyChanged();
+                IsConfigXmlEnabled = false;
+                IsValidateXmlEnabled = false;
             }
         }
 
+        public bool IsConfigXmlEnabled
+        {
+            get { return _isConfigXmlEnabled; }
+            set
+            {
+                _isConfigXmlEnabled = value;
+                OnPropertyChanged();
+            }
+        }
 
+        public bool IsValidateXmlEnabled
+        {
+            get { return _isValidateXmlEnabled; }
+            set
+            {
+                _isValidateXmlEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsGenerateXmlEnabled
+        {
+            get { return _isGenerateXmlEnabled; }
+            set
+            {
+                _isGenerateXmlEnabled = value;
+                OnPropertyChanged();
+            }
+        }
 
         public UtilityMainViewModel()
         {
+            //IsConfigXmlEnabled = false;
+
             ShowDialogToSelectExcel = new RelayCommand(() =>
             {
                 ExcelSourcePath = "";
@@ -127,13 +164,13 @@ namespace DigitasLbi.RedirectTool.ViewModel
                 {
                     StatusFlag = Constant.Constant.MesasgeColor.Green;
                     Message = Constant.Constant.Mesasge.Success.ToString();
+                    IsConfigXmlEnabled = true;
                 }
                 if (msg.Contains(Constant.Constant.Mesasge.Fail.ToString()))
                 {
                     StatusFlag = Constant.Constant.MesasgeColor.Red;
                     Message = msg;
                 }
-
             }, () => true);
 
             ConfigureRewriteRuleCommand = new RelayCommand(() =>
@@ -149,12 +186,17 @@ namespace DigitasLbi.RedirectTool.ViewModel
                 {
                     Helper.Helper.ConfigureRewriteRule(ExcelDestinationPath, savedlg.FileName);
                     Message = "Rewrite output file kept at location:\n" + savedlg.FileName;
+                    IsValidateXmlEnabled = true;
                 }
 
             }, () => true);
 
             ValidateRewriteRuleCommand = new RelayCommand(async () =>
             {
+                IsGenerateXmlEnabled = false;
+                IsConfigXmlEnabled = false;
+                IsValidateXmlEnabled = false;
+
                 Message = "We are working on report...Please wait !\n";
                 StatusFlag = Constant.Constant.MesasgeColor.InProcess;
                 DataTable dt = Helper.Helper.GetDataTableFromXml(ExcelDestinationPath);
@@ -168,7 +210,7 @@ namespace DigitasLbi.RedirectTool.ViewModel
                     {
                         validationDoneTxt = string.Format(ValidationDoneTemplate, i - 1, dt.Rows[i - 1][0], dt.Rows[i - 1][1], dt.Rows[i - 1][2]);
                     }
-                    Message += string.Format("{0}\n\n{1}", validationTxt, validationDoneTxt);
+                    Message = string.Format("{0}\n\n{1}", validationTxt, validationDoneTxt);
                     dt.Rows[i][2] = await Helper.Helper.ValidateRuleAsync(dt.Rows[i][0].ToString(), dt.Rows[i][1].ToString());
                 }
                 Message = "Validation done. Now, generating report.";
@@ -176,6 +218,10 @@ namespace DigitasLbi.RedirectTool.ViewModel
                 Helper.Helper.DataTableToExcel(excelToBeSavedAtLocation, dt);
                 Message = "Report created and can be downloaded from location :\n" + excelToBeSavedAtLocation;
                 StatusFlag = Constant.Constant.MesasgeColor.Green;
+
+                IsGenerateXmlEnabled = true;
+                IsConfigXmlEnabled = true;
+                IsValidateXmlEnabled = true;
             }, () => true);
 
             StatusFlag = Constant.Constant.MesasgeColor.Default;

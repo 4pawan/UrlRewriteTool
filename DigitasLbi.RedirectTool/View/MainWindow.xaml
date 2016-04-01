@@ -11,6 +11,7 @@
         <Common:StringToColorConverter x:Key="StringToColorConverter"/>
         <Common:NegationConvertor x:Key="NegationConvertor"/>
         <Common:OrConverter x:Key="OrConverter"/>
+        <Common:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
     <Window.DataContext>
         <ViewModel:UtilityMainViewModel/>
@@ -75,7 +76,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Content="Configure xml" HorizontalAlignment="Left" VerticalAlignment="Top" Width="484" Margin="17,7.4,0,0" Command="{Binding ConfigureRewriteRuleCommand}" Grid.Row="4"/>
-        <Button Content="Validate xml" HorizontalAlignment="Left" VerticalAlignment="Top" Width="484" Margin="17,7.4,0,0" Command="{Binding ValidateRewriteRuleCommand}" Grid.Row="5"/>
+        <Button IsEnabled="{Binding IsConfigXmlEnabled, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="Configure xml" HorizontalAlignment="Left" VerticalAlignment="Top" Width="484" Margin="17,7.4,0,0" Command="{Binding ConfigureRewriteRuleCommand}" Grid.Row="4"/>
+        <Button IsEnabled="{Binding IsValidateXmlEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Validate xml" HorizontalAlignment="Left" VerticalAlignment="Top" Width="484" Margin="17,7.4,0,0" Command="{Binding ValidateRewriteRuleCommand}" Grid.Row="5"/>
     </Grid>
 </Window>

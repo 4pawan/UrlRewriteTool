@@ -118,6 +118,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Common\BooleanToVisibilityConverter.cs" />
     <Compile Include="Common\NegationConvertor.cs" />
     <Compile Include="Common\OrConverter.cs" />
     <Compile Include="Common\StringToColorConverter.cs" />
