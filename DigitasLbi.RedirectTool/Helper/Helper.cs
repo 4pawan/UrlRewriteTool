@@ -172,8 +172,8 @@ namespace DigitasLbi.RedirectTool.Helper
                 var httpClient = new HttpClient();
                 var response = await httpClient.GetAsync(existingUrl);
 
-                return response.IsSuccessStatusCode &&
-                       response.RequestMessage.RequestUri.AbsoluteUri.ToLower().Contains(expectedUrl.ToLower())
+                return response.IsSuccessStatusCode && System.Net.WebUtility.UrlDecode(response.RequestMessage.RequestUri.AbsoluteUri.ToLower())
+                       .Contains(System.Net.WebUtility.UrlDecode(expectedUrl.ToLower()))
                     ? "Ok"
                     : "Error";
             }
