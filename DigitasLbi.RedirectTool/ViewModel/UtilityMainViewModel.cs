@@ -58,6 +58,7 @@ namespace DigitasLbi.RedirectTool.ViewModel
             {
                 _excelSourcePath = value;
                 OnPropertyChanged();
+                GenerateXmlEnabledEvent();
                 IsConfigXmlEnabled = false;
                 IsValidateXmlEnabled = false;
             }
@@ -70,6 +71,7 @@ namespace DigitasLbi.RedirectTool.ViewModel
             {
                 _excelDestinationPath = value;
                 OnPropertyChanged();
+                GenerateXmlEnabledEvent();
                 IsConfigXmlEnabled = false;
                 IsValidateXmlEnabled = false;
             }
@@ -107,7 +109,8 @@ namespace DigitasLbi.RedirectTool.ViewModel
 
         public UtilityMainViewModel()
         {
-            //IsConfigXmlEnabled = false;
+            IsGenerateXmlEnabled = false;
+            IsConfigXmlEnabled = false;
 
             ShowDialogToSelectExcel = new RelayCommand(() =>
             {
@@ -224,5 +227,20 @@ namespace DigitasLbi.RedirectTool.ViewModel
             Message = Constant.Constant.Mesasge.NotStarted.ToString();
 
         }
+
+
+        public void GenerateXmlEnabledEvent()
+        {
+            if (!string.IsNullOrEmpty(ExcelSourcePath) && !string.IsNullOrEmpty(ExcelDestinationPath))
+            {
+                IsGenerateXmlEnabled = true;
+            }
+            else
+            {
+                IsGenerateXmlEnabled = false;
+            }
+
+        }
+
     }
 }

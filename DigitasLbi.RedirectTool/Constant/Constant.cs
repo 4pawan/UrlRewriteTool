@@ -23,9 +23,6 @@ namespace DigitasLbi.RedirectTool.Constant
             public static string ValidationDoneTemplate = "Verification done for Rule{0}: result :{1}\n";
         }
 
-
-
-
         public enum MesasgeColor
         {
             Green,

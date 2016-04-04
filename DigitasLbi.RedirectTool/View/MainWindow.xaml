@@ -41,27 +41,10 @@
         <Button Name="BtnDestination"  Content="Please select path to save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Margin="17,8,0,0" Command="{Binding ShowSaveDialog}" Grid.Row="2" />
         <TextBox Text="{Binding ExcelDestinationPath, Mode=TwoWay}"  Grid.Row="2" Margin="183,8,0,0"/>
         <ScrollViewer Grid.Row="6">
-            <TextBlock  ScrollViewer.CanContentScroll="True" Margin="17,13,41,10"  Text="{Binding Message,Mode=TwoWay}" Background="{Binding StatusFlag, Mode=TwoWay, Converter={StaticResource StringToColorConverter}}">
-            <!--<TextBlock.Style>
-                <Style TargetType="TextBlock">
-                    <Setter Property="Background"  Value="White"/>
-                    <Style.Triggers>
-                        <DataTrigger Value="AA">
-                            <DataTrigger.Binding>
-                                <MultiBinding Converter="{StaticResource OrConverter}">
-                                    <Binding Path="ExcelSourcePath"/>
-                                    <Binding Path="ExcelDestinationPath"/>
-                                </MultiBinding>
-                            </DataTrigger.Binding>
-                            <Setter Property="Background" Value="Fuchsia"></Setter>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>-->
-            </TextBlock>
+            <TextBlock  ScrollViewer.CanContentScroll="True" Margin="17,13,41,10"  Text="{Binding Message,Mode=TwoWay}" Background="{Binding StatusFlag, Mode=TwoWay, Converter={StaticResource StringToColorConverter}}"/>
         </ScrollViewer>
-        <Button Content="Generate xml" HorizontalAlignment="Left" VerticalAlignment="Top" Width="484" Margin="17,7.4,0,0" Command="{Binding UrlRewriteUtilityCommand}" Grid.Row="3">
-            <Button.Style>
+        <Button IsEnabled="{Binding IsGenerateXmlEnabled, Mode=TwoWay}" Content="Generate xml" HorizontalAlignment="Left" VerticalAlignment="Top" Width="484" Margin="17,7.4,0,0" Command="{Binding UrlRewriteUtilityCommand}" Grid.Row="3">
+            <!--<Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="IsEnabled" Value="False"/>
                     <Style.Triggers>
@@ -74,7 +57,7 @@
                         </MultiDataTrigger>
                     </Style.Triggers>
                 </Style>
-            </Button.Style>
+            </Button.Style>-->
         </Button>
         <Button IsEnabled="{Binding IsConfigXmlEnabled, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="Configure xml" HorizontalAlignment="Left" VerticalAlignment="Top" Width="484" Margin="17,7.4,0,0" Command="{Binding ConfigureRewriteRuleCommand}" Grid.Row="4"/>
         <Button IsEnabled="{Binding IsValidateXmlEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Validate xml" HorizontalAlignment="Left" VerticalAlignment="Top" Width="484" Margin="17,7.4,0,0" Command="{Binding ValidateRewriteRuleCommand}" Grid.Row="5"/>
