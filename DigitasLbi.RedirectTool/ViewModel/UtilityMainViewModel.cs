@@ -212,12 +212,13 @@ namespace DigitasLbi.RedirectTool.ViewModel
                     Message += $"{validationDoneTxt}{validationTxt}";
                     dt.Rows[i][2] = await Helper.Helper.ValidateRuleAsync(dt.Rows[i][0].ToString(), dt.Rows[i][1].ToString());
                 }
+
                 Message = Constant.Constant.Utility.GeneratingReport;
                 string excelToBeSavedAtLocation = ExcelDestinationPath.Replace(".xml", ".xlsx");
                 Helper.Helper.DataTableToExcel(excelToBeSavedAtLocation, dt);
                 Message = Constant.Constant.Utility.ReportGenerationDone + "\n" + excelToBeSavedAtLocation;
                 StatusFlag = Constant.Constant.MesasgeColor.Green;
-
+                 
                 IsGenerateXmlEnabled = true;
                 IsConfigXmlEnabled = true;
                 IsValidateXmlEnabled = true;
